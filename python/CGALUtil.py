@@ -44,6 +44,17 @@ def loadScene(fname, wrapped=True, rawShape=False, coords=None, **kwargs):
                      wrapped=wrapped, rawShape=rawShape, coords=coords, material=False, **kwargs)
 #def loadMesh(fname, wrapped=True, rawShape=False, coords=None, **kwargs):
 def loadMesh(fname, wrapped=True, rawShape=False, coords=None, **kwargs):
+    """Load mesh file and make shape using cnoid.Util.MeshGenerator via mkshapes.
+
+    Args:
+        fname (str) : mesh file name. Supported formats are STL, OBJ.
+        wrapped (boolean, default = True) : If True, the loaded scene is wrapped by irsl_choreonoid.irsl_draw_object.coordsWrapper
+        rawShape (boolean, default = False) : If True, instance of cnoid.Util.SgShape will be returned (ignore wrapped)
+        coords (cnoid.IRSLCoords.coordinates, optional) :
+        kwargs (dict[str, Any]): Additional keyword arguments for mesh and material generation.
+            Common examples:
+                color (list[float]): RGB color (3 elements). Overrides material color if specified.
+    """
     ret=mkshapes.loadMesh(fname, rawShape=True, **kwargs)
     slst=mkshapes.extractShapes(ret)
     if len(slst) == 0:
@@ -54,34 +65,191 @@ def loadMesh(fname, wrapped=True, rawShape=False, coords=None, **kwargs):
                      wrapped=wrapped, rawShape=rawShape, coords=coords, material=False, **kwargs)
 #def makeBox(x, y = None, z = None, wrapped=True, rawShape=False, coords=None, **kwargs):
 def makeBox(x, y = None, z = None, wrapped=True, rawShape=False, coords=None, **kwargs):
+    """Making 'Box' shape using cnoid.Util.MeshGenerator via mkshapes.
+
+    Args:
+        x (float) : Length of x-axis, if y and z is None, making 'cube'
+        y (float, optional) : Length of y-direction edge
+        z (float, optional) : Length of z-direction edge
+        wrapped (boolean, default = True) : If True, the loaded scene is wrapped by irsl_choreonoid.irsl_draw_object.coordsWrapper
+        rawShape (boolean, default = False) : If True, instance of cnoid.Util.SgShape will be returned (ignore wrapped)
+        coords (cnoid.IRSLCoords.coordinates, optional) :
+        kwargs (dict[str, Any]): Additional keyword arguments for mesh and material generation.
+            Common examples:
+                color (list[float]): RGB color (3 elements). Overrides material color if specified.
+                texture (str, optional) : Image file-name of texture
+
+    Returns:
+        cnoid.Util.SgPosTransform or irsl_choreonoid.irsl_draw_object.coordsWrapper : Created object as a node of SceneGraph or wrapped class for interactive programming
+
+    Note:
+        Origin of generated shape is the center of it.
+
+    """
     return cgalShape(mkshapes.makeBox(x, y, z, rawShape=True, **kwargs),
                      wrapped=wrapped, rawShape=rawShape, coords=coords, material=False, **kwargs)
 #def makeCylinder(radius, height, wrapped=True, rawShape=False, coords=None, **kwargs):
 def makeCylinder(radius, height, wrapped=True, rawShape=False, coords=None, **kwargs):
+    """Making 'Cylinder' shape using cnoid.Util.MeshGenerator via mkshapes
+
+    Args:
+        radius (float) : Radius of the cylinder
+        height (float) : Height of the cylinder
+        wrapped (boolean, default = True) : If True, the loaded scene is wrapped by irsl_choreonoid.irsl_draw_object.coordsWrapper
+        rawShape (boolean, default = False) : If True, instance of cnoid.Util.SgShape will be returned (ignore wrapped)
+        coords (cnoid.IRSLCoords.coordinates, optional) :
+        kwargs (dict[str, Any]): Additional keyword arguments for mesh and material generation.
+            Common examples:
+                color (list[float]): RGB color (3 elements). Overrides material color if specified.
+                texture (str, optional) : Image file-name of texture.
+
+    Returns:
+        cnoid.Util.SgPosTransform or irsl_choreonoid.irsl_draw_object.coordsWrapper : Created object as a node of SceneGraph or wrapped class for interactive programming
+
+    Note:
+        Center circle with indicated radius on XZ-plane and sweep to both side with half of height, along y-direction
+
+    """
     return cgalShape(mkshapes.makeCylinder(radius, height, rawShape=True, **kwargs),
                      wrapped=wrapped, rawShape=rawShape, coords=coords, material=False, **kwargs)
 #def makeSphere(radius, wrapped=True, rawShape=False, coords=None, **kwargs):
 def makeSphere(radius, wrapped=True, rawShape=False, coords=None, **kwargs):
+    """Make 'Sphere' shape using cnoid.Util.MeshGenerator via mkshapes.
+
+    Args:
+        radius (float) : Radius of the sphere
+        wrapped (boolean, default = True) : If True, the loaded scene is wrapped by irsl_choreonoid.irsl_draw_object.coordsWrapper
+        rawShape (boolean, default = False) : If True, instance of cnoid.Util.SgShape will be returned (ignore wrapped)
+        coords (cnoid.IRSLCoords.coordinates, optional) :
+        kwargs (dict[str, Any]): Additional keyword arguments for mesh and material generation.
+            Common examples:
+                color (list[float]): RGB color (3 elements). Overrides material color if specified.
+                texture (str, optional) : Image file-name of texture.
+
+    Returns:
+        cnoid.Util.SgPosTransform or irsl_choreonoid.irsl_draw_object.coordsWrapper : Created object as a node of SceneGraph or wrapped class for interactive programming
+
+    Note:
+        Origin of generated shape is the center of it.
+
+    """
     return cgalShape(mkshapes.makeSphere(radius, rawShape=True, **kwargs),
                      wrapped=wrapped, rawShape=rawShape, coords=coords, material=False, **kwargs)
 #def makeCone(radius, height, wrapped=True, rawShape=False, coords=None, **kwargs):
 def makeCone(radius, height, wrapped=True, rawShape=False, coords=None, **kwargs):
+    """Making 'Cone' shape using cnoid.Util.MeshGenerator via mkshapes.
+
+    Args:
+        radius (float) : Radius of the cone
+        height (float) : Height of the cone
+        wrapped (boolean, default = True) : If True, the loaded scene is wrapped by irsl_choreonoid.irsl_draw_object.coordsWrapper
+        rawShape (boolean, default = False) : If True, instance of cnoid.Util.SgShape will be returned (ignore wrapped)
+        coords (cnoid.IRSLCoords.coordinates, optional) :
+        kwargs (dict[str, Any]): Additional keyword arguments for mesh and material generation.
+            Common examples:
+                color (list[float]): RGB color (3 elements). Overrides material color if specified.
+                texture (str, optional) : Image file-name of texture.
+
+
+    Returns:
+        cnoid.Util.SgPosTransform or irsl_choreonoid.irsl_draw_object.coordsWrapper : Created object as a node of SceneGraph or wrapped class for interactive programming
+
+    """
     return cgalShape(mkshapes.makeCone(radius, height, rawShape=True, **kwargs),
                      wrapped=wrapped, rawShape=rawShape, coords=coords, material=False, **kwargs)
 #def makeCapsule(radius, height, wrapped=True, rawShape=False, coords=None, **kwargs):
 def makeCapsule(radius, height, wrapped=True, rawShape=False, coords=None, **kwargs):
+    """Making 'Capsule' shape using cnoid.Util.MeshGenerator via mkshapes.
+
+    Args:
+        radius (float) : Radius of the capsule
+        height (float, optional) : Height of the capsule
+        wrapped (boolean, default = True) : If True, the loaded scene is wrapped by irsl_choreonoid.irsl_draw_object.coordsWrapper
+        rawShape (boolean, default = False) : If True, instance of cnoid.Util.SgShape will be returned (ignore wrapped)
+        coords (cnoid.IRSLCoords.coordinates, optional) :
+        kwargs (dict[str, Any]): Additional keyword arguments for mesh and material generation.
+            Common examples:
+                color (list[float]): RGB color (3 elements). Overrides material color if specified.
+                texture (str, optional) : Image file-name of texture.
+
+    Returns:
+        cnoid.Util.SgPosTransform or irsl_choreonoid.irsl_draw_object.coordsWrapper : Created object as a node of SceneGraph or wrapped class for interactive programming
+
+    Note:
+        Similar dimensions to 'makeCylinder' (bottom circle is at minus y, cone's tip is at plus y)
+
+    """
     return cgalShape(mkshapes.makeCapsule(radius, height, rawShape=True, **kwargs),
                      wrapped=wrapped, rawShape=rawShape, coords=coords, material=False, **kwargs)
-#def makeTorus(radius, corssSectionRadius, beginAngle = None, endAngle = None, wrapped=True, rawShape=False, coords=None, **kwargs):
-def makeTorus(radius, corssSectionRadius, beginAngle = None, endAngle = None, wrapped=True, rawShape=False, coords=None, **kwargs):
-    return cgalShape(mkshapes.makeTorus(radius, corssSectionRadius, beginAngle=beginAngle, endAngle=endAngle, rawShape=True, **kwargs),
+#def makeTorus(radius, crossSectionRadius, beginAngle = None, endAngle = None, wrapped=True, rawShape=False, coords=None, **kwargs):
+def makeTorus(radius, crossSectionRadius, beginAngle = None, endAngle = None, wrapped=True, rawShape=False, coords=None, **kwargs):
+    """Making 'Torus' shape using cnoid.Util.MeshGenerator via mkshapes.
+
+    Args:
+        radius (float) : Outer radius of the torus
+        crossSectionRadius (float) : Radius of cross section
+        beginAngle (float, optional) : If beginAngle and endAngle is passed, part of whole torus is created
+        endAngle (float, optional) : 
+        wrapped (boolean, default = True) : If True, the loaded scene is wrapped by irsl_choreonoid.irsl_draw_object.coordsWrapper
+        rawShape (boolean, default = False) : If True, instance of cnoid.Util.SgShape will be returned (ignore wrapped)
+        coords (cnoid.IRSLCoords.coordinates, optional) :
+        kwargs (dict[str, Any]): Additional keyword arguments for mesh and material generation.
+            Common examples:
+                color (list[float]): RGB color (3 elements). Overrides material color if specified.
+                texture (str, optional) : Image file-name of texture.
+
+    Returns:
+        cnoid.Util.SgPosTransform or irsl_choreonoid.irsl_draw_object.coordsWrapper : Created object as a node of SceneGraph or wrapped class for interactive programming
+
+    """
+    return cgalShape(mkshapes.makeTorus(radius, crossSectionRadius, beginAngle=beginAngle, endAngle=endAngle, rawShape=True, **kwargs),
                      wrapped=wrapped, rawShape=rawShape, coords=coords, material=False, **kwargs)
 #def makeExtrusion(crossSection, spine, wrapped=True, rawShape=False, coords=None, **kwargs):
 def makeExtrusion(crossSection, spine, wrapped=True, rawShape=False, coords=None, **kwargs):
+    """Making 'Extrusion' shape using cnoid.Util.MeshGenerator via mkshapes.
+
+    Args:
+        crossSection ( list[list[float]],  N x 2 matrix) : A 2D polygon defined on the XZ plane. The vertices must be ordered (typically counterclockwise).
+        spine ( list[list[float]], M x 3 matrix) : A 3D polyline representing the extrusion path. Each element is [x, y, z]. The crossSection is swept along this path.
+        wrapped (boolean, default = True) : If True, the loaded scene is wrapped by irsl_choreonoid.irsl_draw_object.coordsWrapper
+        rawShape (boolean, default = False) : If True, instance of cnoid.Util.SgShape will be returned (ignore wrapped)
+        coords (cnoid.IRSLCoords.coordinates, optional) :
+        
+        kwargs (dict[str, Any]):
+            Optional parameters passed to MeshGenerator::Extrusion:
+            orientation (list[AngleAxis], optional) : Per-spine-point orientation of the cross section. The length must match the number of spine points.
+            scale (list[list[float]], M x 2, optional): Per-spine-point scaling factors for the cross section. Each element is [sx, sz], applied to the X and Z axes of the crossSection.
+            creaseAngle (float, optional): Threshold angle (in radians) used when generating normals. Edges with angles larger than this are treated as sharp.
+            beginCap (bool, optional): If True, a cap (polygon) is generated at the beginning of the spine.
+            endCap (bool, optional): If True, a cap (polygon) is generated at the end of the spine.
+            texture (str, optional) : Image file-name of texture.
+            color (list[float], 3, optional):  RGB color applied to the entire extrusion. Overrides material color if specified.
+
+    Returns:
+        cnoid.Util.SgPosTransform or irsl_choreonoid.irsl_draw_object.coordsWrapper : Created object as a node of SceneGraph or wrapped class for interactive programming
+
+    """
     return cgalShape(mkshapes.makeExtrusion(crossSection, spine, rawShape=True, **kwargs),
                      wrapped=wrapped, rawShape=rawShape, coords=coords, material=False, **kwargs)
 #def makeTetrahedron(base_width, base_height, height, base_center=None, center_x=None, center_y=None, wrapped=True, rawShape=False, coords=None, **kwargs):
 def makeTetrahedron(base_width, base_height, height, base_center=None, center_x=None, center_y=None, wrapped=True, coords=None, **kwargs):
+    """Making 'Tetrahedron' shape
+
+    Args:
+        base_width (float) : base width of the tetrahedron.
+        base_height (float) : base height of the tetrahedron.
+        height (float) : height of the tetrahedron.
+        base_center (float, optional) : Center of the base of the tetrahedron.
+        center_x (float, optional) : X-coordinate of the center of the tetrahedron.
+        center_y(float, optional) : Y-coordinate of the center of the tetrahedron.
+        wrapped (boolean, default = True) : If True, the loaded scene is wrapped by irsl_choreonoid.irsl_draw_object.coordsWrapper
+        coords (cnoid.IRSLCoords.coordinates, optional) :
+        kwargs ( dict[str, param] ) : Keywords for generating material and mesh
+
+    Returns:
+        cnoid.Util.SgPosTransform or irsl_choreonoid.irsl_draw_object.coordsWrapper : Created object as a node of SceneGraph or wrapped class for interactive programming
+
+    """
     return cgalShape(mkshapes.makeTetrahedron(base_width, base_height, height, base_center, center_x, center_y, rawShape=True, **kwargs),
                      wrapped=wrapped, coords=coords, material=False, **kwargs)
 
