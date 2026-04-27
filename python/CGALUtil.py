@@ -37,7 +37,7 @@ def loadScene(fname, wrapped=True, rawShape=False, coords=None, **kwargs):
     ret=mkshapes.loadScene(fname, rawShape=True, **kwargs)
     slst=mkshapes.extractShapes(ret)
     if len(slst) == 0:
-        raise Exception('no shape was loaded from {}'.foramt(fname))
+        raise Exception('no shape was loaded from {}'.format(fname))
     if len(slst) > 1:
         print('there are more than one({}) shapes'.format(len(slst)))
     return cgalShape(slst[0][0],
@@ -47,7 +47,7 @@ def loadMesh(fname, wrapped=True, rawShape=False, coords=None, **kwargs):
     ret=mkshapes.loadMesh(fname, rawShape=True, **kwargs)
     slst=mkshapes.extractShapes(ret)
     if len(slst) == 0:
-        raise Exception('no shape was loaded from {}'.foramt(fname))
+        raise Exception('no shape was loaded from {}'.format(fname))
     if len(slst) > 1:
         print('there are more than one({}) shapes'.format(len(slst)))
     return cgalShape(slst[0][0],
@@ -294,7 +294,7 @@ def convertToBoxes(cgalmesh, dim=None, dim_x=1, dim_y=1, dim_z=1, material=None,
         elif isinstance(obj, cutil.SgNode):
             slst=mkshapes.extractShapes(obj)
             if len(slst) == 0:
-                raise Exception('no shape was in {}'.foramt(cgalmesh))
+                raise Exception('no shape was in {}'.format(cgalmesh))
             if len(slst) > 1:
                 print('there are more than one({}) shapes'.format(len(slst)))
             cgalmesh=slst[0][0].mesh
@@ -341,7 +341,7 @@ def createOctomap(cgalmesh, material=None): ##
         elif isinstance(obj, cutil.SgNode):
             slst=mkshapes.extractShapes(obj)
             if len(slst) == 0:
-                raise Exception('no shape was in {}'.foramt(cgalmesh))
+                raise Exception('no shape was in {}'.format(cgalmesh))
             if len(slst) > 1:
                 print('there are more than one({}) shapes'.format(len(slst)))
             cgalmesh=slst[0][0].mesh
